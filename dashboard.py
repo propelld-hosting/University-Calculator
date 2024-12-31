@@ -5,6 +5,7 @@ import mysql.connector
 from datetime import datetime
 import uuid
 import numpy as np
+import openpyxl
 
 # db_config_write = {
 #     'user': 'rijul',
