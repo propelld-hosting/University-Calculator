@@ -18,32 +18,32 @@ import openpyxl
 
 #file_name = '/Users/propelld/Desktop/University_Calculator/Dashboard/base_tables.xlsx'
 file_name = 'base_tables.xlsx'
-def load_data(sheet_name):
-    return pd.read_excel(file_name, sheet_name=sheet_name, engine='openpyxl')
+# def load_data(sheet_name):
+#     return pd.read_excel(file_name, sheet_name=sheet_name, engine='openpyxl')
 
-df_institute_details = load_data('Institute Details')
-df_roi = load_data('Institute Details')  # Assuming both sheets have the same name
-df_student_income_multiplier = load_data('Student Income Multiplier')
-df_student_income_roi = load_data('Student Income ROI')
-df_student_tenure = load_data('Student tenure')
-df_student_morat = load_data('Student Morat')
-df_foir = load_data('FOIR')
+# df_institute_details = load_data('Institute Details')
+# df_roi = load_data('Institute Details')  # Assuming both sheets have the same name
+# df_student_income_multiplier = load_data('Student Income Multiplier')
+# df_student_income_roi = load_data('Student Income ROI')
+# df_student_tenure = load_data('Student tenure')
+# df_student_morat = load_data('Student Morat')
+# df_foir = load_data('FOIR')
 
-df_parent_income_multiplier = load_data('Parent Income Multiplier')
-df_bureau_penalty = load_data('Bureau Penalty')
-df_parent_tenure = load_data('Parent Tenure')
+# df_parent_income_multiplier = load_data('Parent Income Multiplier')
+# df_bureau_penalty = load_data('Bureau Penalty')
+# df_parent_tenure = load_data('Parent Tenure')
 
-# df_institute_details = pd.read_excel(file_name,sheet_name = 'Institute Details')
-# df_roi = pd.read_excel(file_name,sheet_name = 'Institute Details')
-# df_student_income_multiplier = pd.read_excel(file_name, sheet_name='Student Income Multiplier')
-# df_student_income_roi = pd.read_excel(file_name,sheet_name='Student Income ROI')
-# df_student_tenure = pd.read_excel(file_name,sheet_name= 'Student tenure')
-# df_student_morat = pd.read_excel(file_name,sheet_name='Student Morat')
-# df_foir = pd.read_excel(file_name,sheet_name='FOIR')
+df_institute_details = pd.read_excel(file_name,sheet_name = 'Institute Details')
+df_roi = pd.read_excel(file_name,sheet_name = 'Institute Details')
+df_student_income_multiplier = pd.read_excel(file_name, sheet_name='Student Income Multiplier')
+df_student_income_roi = pd.read_excel(file_name,sheet_name='Student Income ROI')
+df_student_tenure = pd.read_excel(file_name,sheet_name= 'Student tenure')
+df_student_morat = pd.read_excel(file_name,sheet_name='Student Morat')
+df_foir = pd.read_excel(file_name,sheet_name='FOIR')
 
-# df_parent_income_multiplier = pd.read_excel(file_name,sheet_name='Parent Income Multiplier')
-# df_bureau_penalty = pd.read_excel(file_name,sheet_name='Bureau Penalty')
-# df_parent_tenure = pd.read_excel(file_name,sheet_name='Parent Tenure')
+df_parent_income_multiplier = pd.read_excel(file_name,sheet_name='Parent Income Multiplier')
+df_bureau_penalty = pd.read_excel(file_name,sheet_name='Bureau Penalty')
+df_parent_tenure = pd.read_excel(file_name,sheet_name='Parent Tenure')
 
 def convert_numpy_types(data):
     for key, value in data.items():
