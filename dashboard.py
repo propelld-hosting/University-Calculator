@@ -5,7 +5,6 @@ import mysql.connector
 from datetime import datetime
 import uuid
 import numpy as np
-import openpyxl
 
 # db_config_write = {
 #     'user': 'rijul',
@@ -18,21 +17,6 @@ import openpyxl
 
 #file_name = '/Users/propelld/Desktop/University_Calculator/Dashboard/base_tables.xlsx'
 file_name = 'base_tables.xlsx'
-# def load_data(sheet_name):
-#     return pd.read_excel(file_name, sheet_name=sheet_name, engine='openpyxl')
-
-# df_institute_details = load_data('Institute Details')
-# df_roi = load_data('Institute Details')  # Assuming both sheets have the same name
-# df_student_income_multiplier = load_data('Student Income Multiplier')
-# df_student_income_roi = load_data('Student Income ROI')
-# df_student_tenure = load_data('Student tenure')
-# df_student_morat = load_data('Student Morat')
-# df_foir = load_data('FOIR')
-
-# df_parent_income_multiplier = load_data('Parent Income Multiplier')
-# df_bureau_penalty = load_data('Bureau Penalty')
-# df_parent_tenure = load_data('Parent Tenure')
-
 df_institute_details = pd.read_excel(file_name,sheet_name = 'Institute Details')
 df_roi = pd.read_excel(file_name,sheet_name = 'Institute Details')
 df_student_income_multiplier = pd.read_excel(file_name, sheet_name='Student Income Multiplier')
@@ -119,7 +103,7 @@ def display_dataframe(params):
     #Placement %age
     placement_percentage = df_institute_details[condition]['Placement %'].iloc[0]
     
-    result_df.loc['Placement %','Value'] = str(round(placement_percentage*100,2)) + '%'
+    result_df.loc['Placement %','Value'] = str(round(placement_percentage*100,0)) + '%'
     
     
     #Expected annual increment
@@ -143,8 +127,8 @@ def display_dataframe(params):
     #Average student income post study
     base = (future_income)*(placement_percentage)
     
-    condition1 = df_student_income_multiplier['Student Avg % (Min)'] <= average_percentage/100
-    condition2 = df_student_income_multiplier['Student Avg % (Max)'] >= average_percentage/100
+    condition1 = df_student_income_multiplier['Student Avg % (Min)'] <= average_percentage
+    condition2 = df_student_income_multiplier['Student Avg % (Max)'] >= average_percentage
     income_multiplier = df_student_income_multiplier[(condition1) & (condition2)]['Student Income Multiplier'].iloc[0]
     
     average_student_income_post_study = base*income_multiplier
@@ -157,7 +141,7 @@ def display_dataframe(params):
     condition2 = df_student_income_roi['Max'] >= average_student_income_post_study
     rate_of_interest = df_student_income_roi[(condition1) & (condition2)]['ROI'].iloc[0]
     
-    result_df.loc['Rate of Interest','Value'] = str(round(rate_of_interest*100,1)) + '%'
+    result_df.loc['Rate of Interest','Value'] = str(round(rate_of_interest*100,0)) + '%'
     
     
     
@@ -191,7 +175,7 @@ def display_dataframe(params):
     
     average_income_over_loan_tenure = (average_student_income_post_study*((pow(a,b)-1)/expected_annual_increment_percentage))/b
     
-    result_df.loc['Average Income over loan tenure','Value'] = round(average_income_over_loan_tenure,1)
+    result_df.loc['Average Income over loan tenure','Value'] = round(average_income_over_loan_tenure,0)
     
     
     #FOIR
@@ -205,7 +189,7 @@ def display_dataframe(params):
     
     #Monthly EMI serviceability by student
     monthly_emi_serviceability_by_student = average_income_over_loan_tenure*foir
-    result_df.loc['Monthly EMI serviceability by student','Value'] = round(monthly_emi_serviceability_by_student,1)
+    result_df.loc['Monthly EMI serviceability by student','Value'] = round(monthly_emi_serviceability_by_student,0)
     
     
     #Loan Eligibility - Student Based
@@ -230,7 +214,7 @@ def display_dataframe(params):
     else:
         average_emi_during_morat = 0
         
-    result_df.loc['Avg. EMI during Morat','Value'] = round(average_emi_during_morat,1)
+    result_df.loc['Avg. EMI during Morat','Value'] = round(average_emi_during_morat,0)
     
     
     
@@ -244,7 +228,7 @@ def display_dataframe(params):
     else:
         loan_eligibility_parent = 0
     
-    result_df.loc['Loan Eligibility - Parent Only','Value'] = round(loan_eligibility_parent,1)
+    result_df.loc['Loan Eligibility - Parent Only','Value'] = round(loan_eligibility_parent,0)
     
     
     #Total Loan Eligibility
@@ -252,6 +236,8 @@ def display_dataframe(params):
         total_loan_eligibility = (5000/average_emi_during_morat)*loan_eligibility_student_based
     else:
         total_loan_eligibility = loan_eligibility_student_based
+        
+    total_loan_eligibility = total_loan_eligibility+loan_eligibility_parent
     
     result_df.loc['Total Loan Eligibility','Value'] = round(total_loan_eligibility,0)
     
