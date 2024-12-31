@@ -6,13 +6,13 @@ from datetime import datetime
 import uuid
 import numpy as np
 
-db_config_write = {
-    'user': 'rijul',
-    'password': 'KVyoMT83ClrTmiX',
-    'host': 'db-product-analytics-new.cgrxatb6l23o.ap-south-1.rds.amazonaws.com',
-    'database': 'propelld'
-}
-mydb_write = mysql.connector.connect(**db_config_write)
+# db_config_write = {
+#     'user': 'rijul',
+#     'password': 'KVyoMT83ClrTmiX',
+#     'host': 'db-product-analytics-new.cgrxatb6l23o.ap-south-1.rds.amazonaws.com',
+#     'database': 'propelld'
+# }
+# mydb_write = mysql.connector.connect(**db_config_write)
 
 
 #file_name = '/Users/propelld/Desktop/University_Calculator/Dashboard/base_tables.xlsx'
@@ -386,174 +386,174 @@ def main():
         
         
     
-        #WRITING IN DB
-        #INPUT
-        record_id = str(uuid.uuid4())
-        current_timestamp = datetime.now()
+        # #WRITING IN DB
+        # #INPUT
+        # record_id = str(uuid.uuid4())
+        # current_timestamp = datetime.now()
         
-        # Construct the SQL INSERT statement
-        insert_query = """
-            INSERT INTO InputUniversityCalculator (
-                Id,
-                CollegeName,
-                CourseType,
-                RemainingCourseTenure,
-                Student10Percentage,
-                Student12Percentage,
-                StudentGradPercentage,
-                ParentEmploymentType,
-                ParentProfession,
-                AnnualParentIncome,
-                BureauScore,
-                AnnualObligations,
-                UpdateTimeStamp_IST
-            ) 
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """
+        # # Construct the SQL INSERT statement
+        # insert_query = """
+        #     INSERT INTO InputUniversityCalculator (
+        #         Id,
+        #         CollegeName,
+        #         CourseType,
+        #         RemainingCourseTenure,
+        #         Student10Percentage,
+        #         Student12Percentage,
+        #         StudentGradPercentage,
+        #         ParentEmploymentType,
+        #         ParentProfession,
+        #         AnnualParentIncome,
+        #         BureauScore,
+        #         AnnualObligations,
+        #         UpdateTimeStamp_IST
+        #     ) 
+        #     VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        # """
 
-        values = (
-            record_id,
-            params["College Name"],
-            params["Course Type"],
-            params["Remaining Course Tenure (months)"],
-            params["Student X%"],
-            params["Student XII%"],
-            params["Student Grad %"],
-            params["Parent Employment Type"],
-            params["Parent Profession"],
-            params["Annual Parent Income (INR)"],
-            params["Bureau Score"],
-            params["Obligations"],
-            current_timestamp
-        )
+        # values = (
+        #     record_id,
+        #     params["College Name"],
+        #     params["Course Type"],
+        #     params["Remaining Course Tenure (months)"],
+        #     params["Student X%"],
+        #     params["Student XII%"],
+        #     params["Student Grad %"],
+        #     params["Parent Employment Type"],
+        #     params["Parent Profession"],
+        #     params["Annual Parent Income (INR)"],
+        #     params["Bureau Score"],
+        #     params["Obligations"],
+        #     current_timestamp
+        # )
 
-        mydb_write.cursor().execute(insert_query, values)
-        mydb_write.commit()
+        # mydb_write.cursor().execute(insert_query, values)
+        # mydb_write.commit()
         
         
         
         
-        #OUTPUT
-        current_time = datetime.now()
+        # #OUTPUT
+        # current_time = datetime.now()
 
-        # Example values from DataFrames
-        final_df_values = {
-            "MaxLA_Parent_Student": final_df.loc['Max LA - Parent + Student', 'Value'],
-            "MaxTenure_Parent_Student": final_df.loc['Max Tenure - Parent + Student', 'Value'],
-            "MoratAvailable": final_df.loc['Can Morat be provided', 'Value'],
-        }
+        # # Example values from DataFrames
+        # final_df_values = {
+        #     "MaxLA_Parent_Student": final_df.loc['Max LA - Parent + Student', 'Value'],
+        #     "MaxTenure_Parent_Student": final_df.loc['Max Tenure - Parent + Student', 'Value'],
+        #     "MoratAvailable": final_df.loc['Can Morat be provided', 'Value'],
+        # }
         
-        result_df_values = {
-            "FutureIncome": result_df.loc['Future Income', 'Value'],
-            "ExpectedAnnualIncrement": result_df.loc['Expected Annual Increment', 'Value'],
-            "AverageAcadPercentage": result_df.loc['Average % (Acad Aggregate)', 'Value'],
-            "AverageStudentIncomePostStudy": result_df.loc['Average Student Income Post Study', 'Value'],
-            "RateOfInterest": result_df.loc['Rate of Interest', 'Value'],
-            "PostStudyMaxTenure": result_df.loc['Post Sudy Max Tenure', 'Value'],
-            "CourseTenure": result_df.loc['Course Tenure', 'Value'],
-            "AverageIncomeOverLoanTenure": result_df.loc['Average Income over loan tenure', 'Value'],
-            "FOIRStudent": result_df.loc['FOIR', 'Value'],
-            "MonthlyEMIServiceabilityByStudent": result_df.loc['Monthly EMI serviceability by student', 'Value'],
-            "LoanEligibilityStudentBased": result_df.loc['Loan Eligibility - Student Based', 'Value'],
-            "AverageEMIDuringMorat": result_df.loc['Avg. EMI during Morat', 'Value'],
-            "LoanEligibilityParentOnly": result_df.loc['Loan Eligibility - Parent Only', 'Value'],
-            "TotalLoanEligibility": result_df.loc['Total Loan Eligibility', 'Value'],
-            "TenureStudentEligibility": result_df.loc['Tenure - Student Eligibility', 'Value'],
-        }
+        # result_df_values = {
+        #     "FutureIncome": result_df.loc['Future Income', 'Value'],
+        #     "ExpectedAnnualIncrement": result_df.loc['Expected Annual Increment', 'Value'],
+        #     "AverageAcadPercentage": result_df.loc['Average % (Acad Aggregate)', 'Value'],
+        #     "AverageStudentIncomePostStudy": result_df.loc['Average Student Income Post Study', 'Value'],
+        #     "RateOfInterest": result_df.loc['Rate of Interest', 'Value'],
+        #     "PostStudyMaxTenure": result_df.loc['Post Sudy Max Tenure', 'Value'],
+        #     "CourseTenure": result_df.loc['Course Tenure', 'Value'],
+        #     "AverageIncomeOverLoanTenure": result_df.loc['Average Income over loan tenure', 'Value'],
+        #     "FOIRStudent": result_df.loc['FOIR', 'Value'],
+        #     "MonthlyEMIServiceabilityByStudent": result_df.loc['Monthly EMI serviceability by student', 'Value'],
+        #     "LoanEligibilityStudentBased": result_df.loc['Loan Eligibility - Student Based', 'Value'],
+        #     "AverageEMIDuringMorat": result_df.loc['Avg. EMI during Morat', 'Value'],
+        #     "LoanEligibilityParentOnly": result_df.loc['Loan Eligibility - Parent Only', 'Value'],
+        #     "TotalLoanEligibility": result_df.loc['Total Loan Eligibility', 'Value'],
+        #     "TenureStudentEligibility": result_df.loc['Tenure - Student Eligibility', 'Value'],
+        # }
         
-        result_df_parent_values = {
-            "ParentIncome": result_df_parent.loc['Parent Income', 'Value'],
-            "MaxTenureBasedOnParent": result_df_parent.loc['Max Tenure based on Parent', 'Value'],
-            "MaxTenureParent_Student": result_df_parent.loc['Max Tenure - Parent + student', 'Value'],
-            "ParentAverageIncomeEstimateOverLoanTenure": result_df_parent.loc['Parent Average Income Estimate over loan tenure', 'Value'],
-            "AnnualCurrentEMIObligations": result_df_parent.loc['Annual Current EMI obligations', 'Value'],
-            "AverageEMIObligations": result_df_parent.loc['Average EMI Obligations', 'Value'],
-            "FOIRParent": result_df_parent.loc['FOIR', 'Value'],
-            "EducationEMIServiceability": result_df_parent.loc['Education EMI Serviceability', 'Value'],
-            "TopUpLAServiceableByParent": result_df_parent.loc['Top up LA serviceable by Parent', 'Value'],
-        }
+        # result_df_parent_values = {
+        #     "ParentIncome": result_df_parent.loc['Parent Income', 'Value'],
+        #     "MaxTenureBasedOnParent": result_df_parent.loc['Max Tenure based on Parent', 'Value'],
+        #     "MaxTenureParent_Student": result_df_parent.loc['Max Tenure - Parent + student', 'Value'],
+        #     "ParentAverageIncomeEstimateOverLoanTenure": result_df_parent.loc['Parent Average Income Estimate over loan tenure', 'Value'],
+        #     "AnnualCurrentEMIObligations": result_df_parent.loc['Annual Current EMI obligations', 'Value'],
+        #     "AverageEMIObligations": result_df_parent.loc['Average EMI Obligations', 'Value'],
+        #     "FOIRParent": result_df_parent.loc['FOIR', 'Value'],
+        #     "EducationEMIServiceability": result_df_parent.loc['Education EMI Serviceability', 'Value'],
+        #     "TopUpLAServiceableByParent": result_df_parent.loc['Top up LA serviceable by Parent', 'Value'],
+        # }
         
-        # Combine all values into one dictionary
-        values = {**final_df_values, **result_df_values, **result_df_parent_values}
+        # # Combine all values into one dictionary
+        # values = {**final_df_values, **result_df_values, **result_df_parent_values}
         
-        # SQL insert query
-        insert_query = """
-            INSERT INTO OutputUniversityCalculator (
-                InputId,
-                MaxLA_Parent_Student,
-                MaxTenure_Parent_Student,
-                MoratAvailable,
-                FutureIncome,
-                ExpectedAnnualIncrement,
-                AverageAcadPercentage,
-                AverageStudentIncomePostStudy,
-                RateOfInterest,
-                PostStudyMaxTenure,
-                CourseTenure,
-                AverageIncomeOverLoanTenure,
-                FOIRStudent,
-                MonthlyEMIServiceabilityByStudent,
-                LoanEligibilityStudentBased,
-                AverageEMIDuringMorat,
-                LoanEligibilityParentOnly,
-                TotalLoanEligibility,
-                TenureStudentEligibility,
-                ParentIncome,
-                MaxTenureBasedOnParent,
-                MaxTenureParent_Student,
-                ParentAverageIncomeEstimateOverLoanTenure,
-                AnnualCurrentEMIObligations,
-                AverageEMIObligations,
-                FOIRParent,
-                EducationEMIServiceability,
-                TopUpLAServiceableByParent,
-                UpdateTimeStamp_IST
-            ) VALUES (
-                %(InputId)s,
-                %(MaxLA_Parent_Student)s,
-                %(MaxTenure_Parent_Student)s,
-                %(MoratAvailable)s,
-                %(FutureIncome)s,
-                %(ExpectedAnnualIncrement)s,
-                %(AverageAcadPercentage)s,
-                %(AverageStudentIncomePostStudy)s,
-                %(RateOfInterest)s,
-                %(PostStudyMaxTenure)s,
-                %(CourseTenure)s,
-                %(AverageIncomeOverLoanTenure)s,
-                %(FOIRStudent)s,
-                %(MonthlyEMIServiceabilityByStudent)s,
-                %(LoanEligibilityStudentBased)s,
-                %(AverageEMIDuringMorat)s,
-                %(LoanEligibilityParentOnly)s,
-                %(TotalLoanEligibility)s,
-                %(TenureStudentEligibility)s,
-                %(ParentIncome)s,
-                %(MaxTenureBasedOnParent)s,
-                %(MaxTenureParent_Student)s,
-                %(ParentAverageIncomeEstimateOverLoanTenure)s,
-                %(AnnualCurrentEMIObligations)s,
-                %(AverageEMIObligations)s,
-                %(FOIRParent)s,
-                %(EducationEMIServiceability)s,
-                %(TopUpLAServiceableByParent)s,
-                %(UpdateTimeStamp_IST)s
-            )
-        """
+        # # SQL insert query
+        # insert_query = """
+        #     INSERT INTO OutputUniversityCalculator (
+        #         InputId,
+        #         MaxLA_Parent_Student,
+        #         MaxTenure_Parent_Student,
+        #         MoratAvailable,
+        #         FutureIncome,
+        #         ExpectedAnnualIncrement,
+        #         AverageAcadPercentage,
+        #         AverageStudentIncomePostStudy,
+        #         RateOfInterest,
+        #         PostStudyMaxTenure,
+        #         CourseTenure,
+        #         AverageIncomeOverLoanTenure,
+        #         FOIRStudent,
+        #         MonthlyEMIServiceabilityByStudent,
+        #         LoanEligibilityStudentBased,
+        #         AverageEMIDuringMorat,
+        #         LoanEligibilityParentOnly,
+        #         TotalLoanEligibility,
+        #         TenureStudentEligibility,
+        #         ParentIncome,
+        #         MaxTenureBasedOnParent,
+        #         MaxTenureParent_Student,
+        #         ParentAverageIncomeEstimateOverLoanTenure,
+        #         AnnualCurrentEMIObligations,
+        #         AverageEMIObligations,
+        #         FOIRParent,
+        #         EducationEMIServiceability,
+        #         TopUpLAServiceableByParent,
+        #         UpdateTimeStamp_IST
+        #     ) VALUES (
+        #         %(InputId)s,
+        #         %(MaxLA_Parent_Student)s,
+        #         %(MaxTenure_Parent_Student)s,
+        #         %(MoratAvailable)s,
+        #         %(FutureIncome)s,
+        #         %(ExpectedAnnualIncrement)s,
+        #         %(AverageAcadPercentage)s,
+        #         %(AverageStudentIncomePostStudy)s,
+        #         %(RateOfInterest)s,
+        #         %(PostStudyMaxTenure)s,
+        #         %(CourseTenure)s,
+        #         %(AverageIncomeOverLoanTenure)s,
+        #         %(FOIRStudent)s,
+        #         %(MonthlyEMIServiceabilityByStudent)s,
+        #         %(LoanEligibilityStudentBased)s,
+        #         %(AverageEMIDuringMorat)s,
+        #         %(LoanEligibilityParentOnly)s,
+        #         %(TotalLoanEligibility)s,
+        #         %(TenureStudentEligibility)s,
+        #         %(ParentIncome)s,
+        #         %(MaxTenureBasedOnParent)s,
+        #         %(MaxTenureParent_Student)s,
+        #         %(ParentAverageIncomeEstimateOverLoanTenure)s,
+        #         %(AnnualCurrentEMIObligations)s,
+        #         %(AverageEMIObligations)s,
+        #         %(FOIRParent)s,
+        #         %(EducationEMIServiceability)s,
+        #         %(TopUpLAServiceableByParent)s,
+        #         %(UpdateTimeStamp_IST)s
+        #     )
+        # """
         
-        values['InputId'] = record_id
-        values['UpdateTimeStamp_IST'] = current_time
+        # values['InputId'] = record_id
+        # values['UpdateTimeStamp_IST'] = current_time
         
-        # Convert NumPy types in the `values` dictionary
-        values = convert_numpy_types(values)
+        # # Convert NumPy types in the `values` dictionary
+        # values = convert_numpy_types(values)
 
-        # Add unique keys and timestamp to the dictionary
-        values['InputId'] = record_id
-        values['UpdateTimeStamp_IST'] = current_time
+        # # Add unique keys and timestamp to the dictionary
+        # values['InputId'] = record_id
+        # values['UpdateTimeStamp_IST'] = current_time
         
-        # Execute the query
-        mydb_write.cursor().execute(insert_query, values)
-        mydb_write.commit()
+        # # Execute the query
+        # mydb_write.cursor().execute(insert_query, values)
+        # mydb_write.commit()
 
 
 if __name__ == "__main__":
