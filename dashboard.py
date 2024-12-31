@@ -15,8 +15,8 @@ import numpy as np
 # mydb_write = mysql.connector.connect(**db_config_write)
 
 
-#file_name = '/Users/propelld/Desktop/University_Calculator/Dashboard/base_tables.xlsx'
-file_name = 'base_tables.xlsx'
+file_name = '/Users/propelld/Desktop/University_Calculator/Dashboard/base_tables.xlsx'
+#file_name = 'base_tables.xlsx'
 df_institute_details = pd.read_excel(file_name,sheet_name = 'Institute Details')
 df_roi = pd.read_excel(file_name,sheet_name = 'Institute Details')
 df_student_income_multiplier = pd.read_excel(file_name, sheet_name='Student Income Multiplier')
